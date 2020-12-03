@@ -2,4 +2,10 @@
     <string name="app_name">Weather app</string>
     <string name="show_weather">Показать погоду</string>
     <string name="city">Введите город или индекс</string>
+    <string name="button_list">ImageList</string>
+    <string name="button_web">ImageWeb</string>
+    <string name="image_weather">ImageWeather</string>
+    <string name="city_postcode">Введите город или индекс</string>
+    <string name="search">Искать</string>
+    <string name="list_add">Добавить в список</string>
 </resources>
