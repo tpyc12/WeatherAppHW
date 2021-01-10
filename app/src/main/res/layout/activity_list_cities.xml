@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/iphone_background"
     tools:context=".ListCitiesActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -15,12 +14,11 @@
         app:layout_constraintGuide_percent="0.92" />
 
     <ImageView
-        android:id="@+id/imageButtonWeb"
+        android:id="@+id/imageButtonSettings"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:contentDescription="@string/button_web"
-        android:onClick="onClickShowWeb"
+        android:contentDescription="@string/button_settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineStart"
         app:layout_constraintStart_toStartOf="parent"

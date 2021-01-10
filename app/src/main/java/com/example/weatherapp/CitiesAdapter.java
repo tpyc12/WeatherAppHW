@@ -8,12 +8,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.weatherapp.data.City;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class CitiesAdapter extends RecyclerView.Adapter <CitiesAdapter.CitiesViewHolder>{
 
-    private ArrayList<City> cities;
+    private List<City> cities;
     private OnClickCardView clickCardView;
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(ArrayList<City> cities) {
+        this.cities = cities;
+    }
 
     public CitiesAdapter(ArrayList<City> cities) {
         this.cities = cities;
@@ -25,6 +36,7 @@ public class CitiesAdapter extends RecyclerView.Adapter <CitiesAdapter.CitiesVie
 
     public void setClickCardView(OnClickCardView clickCardView) {
         this.clickCardView = clickCardView;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -39,7 +51,7 @@ public class CitiesAdapter extends RecyclerView.Adapter <CitiesAdapter.CitiesVie
         City city = cities.get(position);
         holder.textViewCity.setText(city.getCity());
         holder.textViewTime.setText(city.getTime());
-        holder.textViewTemp.setText(city.getTemp());
+        holder.textViewTemp.setText(String.format("%s", city.getTemp()));
     }
 
     @Override

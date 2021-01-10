@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/iphone_background"
     tools:context=".MainActivity">
 
     <TextView
@@ -45,8 +44,8 @@
 
     <ImageView
         android:id="@+id/imageViewPicture"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +61,7 @@
         app:layout_constraintGuide_percent="0.92" />
 
     <ImageView
-        android:id="@+id/imageButtonWeb"
+        android:id="@+id/imageButtonSettings"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -8,4 +8,11 @@
     <string name="city_postcode">Введите город или индекс</string>
     <string name="search">Искать</string>
     <string name="list_add">Добавить в список</string>
+    <string name="enter_city">Введите город или индекс</string>
+    <string name="add_city">Добавить город</string>
+    <string name="temp_c">°C</string>
+    <string name="temp_f">°F</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="button_settings">Настройки</string>
 </resources>

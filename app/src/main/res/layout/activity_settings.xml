@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <Switch
+        android:id="@+id/switchTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/textViewTempC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/temp_c"
+        android:onClick="onClickSetTempC"
+        app:layout_constraintBottom_toBottomOf="@+id/switchTemp"
+        app:layout_constraintEnd_toStartOf="@+id/switchTemp"
+        app:layout_constraintTop_toTopOf="@+id/switchTemp" />
+
+    <TextView
+        android:id="@+id/textViewTempF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/temp_f"
+        android:onClick="onClickSetTempF"
+        app:layout_constraintBottom_toBottomOf="@+id/switchTemp"
+        app:layout_constraintStart_toEndOf="@+id/switchTemp"
+        app:layout_constraintTop_toTopOf="@+id/switchTemp" />
+
+    <Switch
+        android:id="@+id/switchTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchTemp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/textViewDarkTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/dark_theme"
+        android:onClick="onClickSetLightTheme"
+        app:layout_constraintBottom_toBottomOf="@+id/switchTheme"
+        app:layout_constraintEnd_toStartOf="@+id/switchTheme"
+        app:layout_constraintTop_toTopOf="@+id/switchTheme" />
+
+    <TextView
+        android:id="@+id/textViewLightTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/light_theme"
+        android:onClick="onClickSetDarkTheme"
+        app:layout_constraintBottom_toBottomOf="@+id/switchTheme"
+        app:layout_constraintStart_toEndOf="@+id/switchTheme"
+        app:layout_constraintTop_toTopOf="@+id/switchTheme" />
+
+    <Switch
+        android:id="@+id/switchLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchTemp" />
+
+    <TextView
+        android:id="@+id/textViewLanguageRussian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Русский"
+        app:layout_constraintBottom_toBottomOf="@+id/switchLanguage"
+        app:layout_constraintEnd_toStartOf="@+id/switchLanguage"
+        app:layout_constraintTop_toTopOf="@+id/switchLanguage" />
+
+    <TextView
+        android:id="@+id/textViewLanguageEnglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Английский "
+        app:layout_constraintBottom_toBottomOf="@+id/switchLanguage"
+        app:layout_constraintStart_toEndOf="@+id/switchLanguage"
+        app:layout_constraintTop_toTopOf="@+id/switchLanguage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
