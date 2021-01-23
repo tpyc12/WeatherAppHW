@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp.data.City;
@@ -22,12 +23,18 @@ public class CitiesAdapter extends RecyclerView.Adapter <CitiesAdapter.CitiesVie
         return cities;
     }
 
-    public void setCities(ArrayList<City> cities) {
+    public void setCities(List<City> cities) {
         this.cities = cities;
+        notifyDataSetChanged();
     }
 
-    public CitiesAdapter(ArrayList<City> cities) {
-        this.cities = cities;
+    public void addCities (List<City> cities){
+        this.cities.addAll(cities);
+        notifyDataSetChanged();
+    }
+
+    public CitiesAdapter() {
+        cities = new ArrayList<>();
     }
 
     interface OnClickCardView{

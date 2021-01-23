@@ -10,7 +10,7 @@
         android:id="@+id/editTextCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/city_postcode" />
@@ -19,7 +19,7 @@
         android:id="@+id/buttonShowCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8dp"
         android:onClick="onClickShowWeather"
         android:text="@string/search" />
 
@@ -27,7 +27,7 @@
         android:id="@+id/buttonAddCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8dp"
         android:onClick="onClickAddWeather"
         android:text="@string/list_add" />
 </LinearLayout>

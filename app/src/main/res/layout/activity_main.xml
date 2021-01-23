@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/textViewCity"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textSize="60sp"
+        android:layout_margin="@dimen/margin_8dp"
+        android:textSize="@dimen/text_size_60sp"
         android:gravity="center"
         android:text="Town"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,10 +20,10 @@
 
     <TextView
         android:id="@+id/textViewDescription"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textSize="24sp"
+        android:layout_margin="@dimen/margin_8dp"
+        android:textSize="@dimen/text_size_24sp"
         android:gravity="center"
         android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,10 +32,10 @@
 
     <TextView
         android:id="@+id/textViewTemp"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textSize="72sp"
+        android:layout_margin="@dimen/margin_8dp"
+        android:textSize="@dimen/text_size_72sp"
         android:gravity="center"
         android:text="Temp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,12 +46,12 @@
         android:id="@+id/imageViewPicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8dp"
+        android:contentDescription="@string/image_weather"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTemp"
-        android:contentDescription="@string/image_weather" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTemp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -63,11 +63,11 @@
     <ImageView
         android:id="@+id/imageButtonSettings"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dimen_0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineStart"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8dp"
         android:onClick="onClickShowWeb"
         app:layout_constraintTop_toTopOf="@+id/guideline"
         android:contentDescription="@string/button_web" />
@@ -75,10 +75,10 @@
     <ImageView
         android:id="@+id/imageButtonList"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dimen_0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8dp"
         android:onClick="onClickShowListTowns"
         app:layout_constraintStart_toStartOf="@+id/guidelineEnd"
         app:layout_constraintTop_toBottomOf="@+id/guideline"

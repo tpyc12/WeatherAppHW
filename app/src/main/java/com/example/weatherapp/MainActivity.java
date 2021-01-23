@@ -1,13 +1,21 @@
 package com.example.weatherapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
+import com.example.weatherapp.data.City;
 
 public class MainActivity extends BaseActivity {
 
@@ -20,9 +28,40 @@ public class MainActivity extends BaseActivity {
     private TextView textViewTemp;
     private TextView textViewDescription;
 
-    private String city;
-    private int temp;
-    private String description;
+    private String city = "Москва";
+    private int temp = 6;
+    private String description = "ясно";
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.itemMain:
+                Intent intentToMain = new Intent(this, MainActivity.class);
+                startActivity(intentToMain);
+                break;
+            case R.id.itemListCities:
+                Intent intentToListCities = new Intent(this, ListCitiesActivity.class);
+                startActivity(intentToListCities);
+                break;
+            case R.id.itemSearch:
+                Intent intentToSearch = new Intent(this, FindCityActivity.class);
+                startActivity(intentToSearch);
+                break;
+            case R.id.itemSettings:
+                Intent intentToSettings = new Intent(this, SettingsActivity.class);
+                startActivity(intentToSettings);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

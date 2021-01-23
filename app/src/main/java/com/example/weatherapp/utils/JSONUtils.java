@@ -1,5 +1,7 @@
 package com.example.weatherapp.utils;
 
+import android.util.Log;
+
 import com.example.weatherapp.data.City;
 
 import org.json.JSONException;
@@ -7,9 +9,13 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import static com.example.weatherapp.Logger.DEBUG;
+import static com.example.weatherapp.Logger.VERBOSE;
 
 public class JSONUtils {
 
@@ -23,12 +29,9 @@ public class JSONUtils {
     private static final String KEY_WEATHER_DESC = "weather";
     private static final int KEY_OBJECT_DESC = 0;
     private static final String KEY_DESC = "description";
-    private static final String KEY_ID = "id";
 
-
-
-    public static City getCityFromJSON (JSONObject jsonObject){
-        City result = new City();
+    public static ArrayList<City> getCityFromJSON (JSONObject jsonObject){
+        ArrayList<City> result = new ArrayList<>();
         if (jsonObject == null){
             return result;
         }
@@ -37,12 +40,15 @@ public class JSONUtils {
            DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
            timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+00"));
            String date = timeFormat.format(new Date().getTime() + timezone);
-           String city = jsonObject.getString(KEY_CITY);
+           String cityName = jsonObject.getString(KEY_CITY);
            int temp = jsonObject.getJSONObject(KEY_MAIN_TEMP).getInt(KEY_TEMP);
            String description = jsonObject.getJSONArray(KEY_WEATHER_DESC).getJSONObject(KEY_OBJECT_DESC).getString(KEY_DESC);
-           int id = jsonObject.getInt(KEY_ID);
            String icon = String.format(BASE_ICON_URL, jsonObject.getJSONArray(KEY_WEATHER_DESC).getJSONObject(KEY_OBJECT_DESC).getString(KEY_ICON));
-           result = new City(id, city, temp, date, description, icon);
+           City city = new City(cityName, temp, date, description, icon);
+           result.add(city);
+           if (DEBUG){
+               Log.i("MYRES", String.format("%s, %s, %s, %s, %s", cityName, temp, date, description, icon));
+           }
         } catch (JSONException e) {
             e.printStackTrace();
         }

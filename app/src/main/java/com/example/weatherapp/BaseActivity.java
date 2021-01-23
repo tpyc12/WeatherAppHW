@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String NameSharedPreference = "LOGIN";
-
     private static final String IsDarkTheme = "IS_DARK_THEME";
 
     @Override

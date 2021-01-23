@@ -2,6 +2,7 @@ package com.example.weatherapp.utils;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
+
+import static com.example.weatherapp.Logger.DEBUG;
 
 public class NetworkUtils {
 
@@ -30,28 +33,25 @@ public class NetworkUtils {
     private static final String UNITS_VALUE_METRIC = "metric";
     private static final String UNITS_VALUE_IMPERIAL = "imperial";
 
-    public static final boolean METRIC = true;
-    public static final boolean IMPERIAL = false;
+    public static boolean unitsValue;
+    public static boolean lang;
 
-    public static final boolean RU = true;
-    public static final boolean EN = false;
-
-    public static boolean unitsValue = true;
-    public static boolean lang = true;
+    public NetworkUtils() {
+    }
 
     public static URL buildURL(boolean unitsValue, boolean lang, String city){
         URL result = null;
         String langValue;
         String methodOfUnits;
-        if (!unitsValue){
+        if (unitsValue){
             methodOfUnits = UNITS_VALUE_IMPERIAL;
         }else {
             methodOfUnits = UNITS_VALUE_METRIC;
         }
         if (lang) {
-            langValue = LANGUAGE_VALUE_RU;
-        } else {
             langValue = LANGUAGE_VALUE_EN;
+        } else {
+            langValue = LANGUAGE_VALUE_RU;
         }
         Uri uri = Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(PARAMS_CITY, city)
@@ -61,6 +61,9 @@ public class NetworkUtils {
                 .build();
         try {
             result = new URL(uri.toString());
+            if (DEBUG){
+                Log.i("MYRES", result.toString());
+            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

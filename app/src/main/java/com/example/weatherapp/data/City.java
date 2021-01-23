@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "cities")
 public class City implements Parcelable {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String city;
     private int temp;
@@ -27,7 +27,12 @@ public class City implements Parcelable {
     }
 
     @Ignore
-    public City() {
+    public City(String city, int temp, String time, String description, String icon) {
+        this.city = city;
+        this.temp = temp;
+        this.time = time;
+        this.description = description;
+        this.icon = icon;
     }
 
     protected City(Parcel in) {

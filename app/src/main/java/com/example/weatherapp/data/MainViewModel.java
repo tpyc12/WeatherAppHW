@@ -15,6 +15,10 @@ public class MainViewModel extends AndroidViewModel {
     private static CityDatabase database;
     LiveData<List<City>> cities;
 
+    public LiveData<List<City>> getCities() {
+        return cities;
+    }
+
     public MainViewModel(@NonNull Application application) {
         super(application);
         database = CityDatabase.getInstance(getApplication());
@@ -41,7 +45,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void deleteCity(City city){
-        new InsertTask().execute(city);
+        new DeleteTask().execute(city);
     }
 
     private static class DeleteTask extends AsyncTask<City, Void, Void>{
