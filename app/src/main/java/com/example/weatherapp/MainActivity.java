@@ -1,91 +1,101 @@
 package com.example.weatherapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.annotation.NonNull;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import com.bumptech.glide.Glide;
+import com.example.weatherapp.data.City;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q=%s&appid=6ae260b1fd6b6df0a257fff6e602c5bb&lang=ru&units=metric";
+    private String weather = "https://yandex.ru/pogoda/%s?utm_source=serp&utm_campaign=wizard&utm_medium=desktop&utm_content=wizard_desktop_main&utm_term=title";
 
-    private EditText editTextCity;
-    private TextView textViewWeatherInfo;
+    private ImageView imageViewPicture;
+    private ImageView imageViewWeb;
+    private ImageView imageViewList;
+    private TextView textViewCity;
+    private TextView textViewTemp;
+    private TextView textViewDescription;
+
+    private String city = "Москва";
+    private int temp = 6;
+    private String description = "ясно";
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.itemMain:
+                Intent intentToMain = new Intent(this, MainActivity.class);
+                startActivity(intentToMain);
+                break;
+            case R.id.itemListCities:
+                Intent intentToListCities = new Intent(this, ListCitiesActivity.class);
+                startActivity(intentToListCities);
+                break;
+            case R.id.itemSearch:
+                Intent intentToSearch = new Intent(this, FindCityActivity.class);
+                startActivity(intentToSearch);
+                break;
+            case R.id.itemSettings:
+                Intent intentToSettings = new Intent(this, SettingsActivity.class);
+                startActivity(intentToSettings);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editTextCity = findViewById(R.id.editTextCity);
-        textViewWeatherInfo = findViewById(R.id.textViewWeatherInfo);
+        imageViewPicture = findViewById(R.id.imageViewPicture);
+        imageViewWeb = findViewById(R.id.imageButtonSettings);
+        imageViewList = findViewById(R.id.imageButtonList);
+        textViewCity = findViewById(R.id.textViewCity);
+        textViewTemp = findViewById(R.id.textViewTemp);
+        textViewDescription = findViewById(R.id.textViewDescription);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("city")) {
+            city = intent.getStringExtra("city");
+            temp = intent.getIntExtra("temp", -1);
+            description = intent.getStringExtra("description");
+            Glide.with(this).load(intent.getStringExtra("icon")).into(imageViewPicture);
+        }
+
+        imageViewWeb.setImageResource(R.drawable.www);
+        imageViewList.setImageResource(R.drawable.list);
+        textViewCity.setText(city);
+        textViewTemp.setText(temp + "°");
+        textViewDescription.setText(description);
     }
 
-    public void onClickShowWeather(View view) {
-        String city = editTextCity.getText().toString().trim();
-        if (!city.isEmpty()){
-            DownloadWeatherTask task = new DownloadWeatherTask();
-            String url = String.format(WEATHER_URL, city);
-            task.execute(url);
-        }
+    public void onClickShowWeb(View view) {
+        Intent browseIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format(weather, city)));
+        startActivity(browseIntent);
     }
 
-    private class DownloadWeatherTask extends AsyncTask<String, Void, String>{
-        @Override
-        protected String doInBackground(String... strings) {
-            URL url = null;
-            HttpURLConnection urlConnection = null;
-            StringBuilder result = new StringBuilder();
-            try {
-                url = new URL(strings[0]);
-                urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = urlConnection.getInputStream();
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader reader = new BufferedReader(inputStreamReader);
-                String line = reader.readLine();
-                while (line != null){
-                    result.append(line);
-                    line = reader.readLine();
-                }
-                return result.toString();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null){
-                    urlConnection.disconnect();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                String name = jsonObject.getString("name");
-                String temp = jsonObject.getJSONObject("main").getString("temp");
-                String description = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
-                String weather = String.format("%s\nТемпература: %s\nНа улице: %s", name, temp,description);
-                textViewWeatherInfo.setText(weather);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+    public void onClickShowListTowns(View view) {
+        Intent intent = new Intent(getApplicationContext(), ListCitiesActivity.class);
+        startActivity(intent);
     }
 }
